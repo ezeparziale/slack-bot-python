@@ -4,6 +4,7 @@ from slackeventsapi import SlackEventAdapter
 import pprint
 from message_blocks import MessageBlocks
 from flask import request, Response
+from weather import Weather
 
 class SlackBot():
 
@@ -68,8 +69,8 @@ class SlackBot():
             self.client.chat_postMessage(**message)
 
 
-        @self.app.route('/slash-command', methods=['POST'])
-        def slash_command():
+        @self.app.route('/clima', methods=['POST'])
+        def get_clima():
             print('SLASH')
             data = request.form
             channel_id = data.get('channel_id')
@@ -78,8 +79,12 @@ class SlackBot():
             # pp = pprint.PrettyPrinter(indent=4)
             # pp.pprint(data)
 
-            message = text
+            clima = Weather.get_clima(text)
 
-            self.client.chat_postMessage(channel=channel_id, text=f"Message: {message}")
+
+            message = MessageBlocks.get_weather_block(clima)
+            icon_url =  f"http://openweathermap.org/img/wn/{clima['weather'][0]['icon']}@2x.png"
+            print(icon_url)
+            self.client.chat_postMessage(channel=channel_id, text=f"", blocks=message, icon_url=icon_url)
             return Response(), 200
 
