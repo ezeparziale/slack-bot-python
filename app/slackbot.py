@@ -3,6 +3,7 @@ from slack_sdk.errors import SlackApiError
 from slackeventsapi import SlackEventAdapter
 import pprint
 from message_blocks import MessageBlocks
+from flask import request, Response
 
 class SlackBot():
 
@@ -13,6 +14,9 @@ class SlackBot():
 
         ## Slack events
         self.slack_event_adapter = SlackEventAdapter(SIGNING_SECRET, '/slack/events/', app)
+
+        ## Flask app
+        self.app = app
 
         # Event 
         @self.slack_event_adapter.on('message')
@@ -58,8 +62,24 @@ class SlackBot():
             pp.pprint(event)
             message = {
                 'channel': channel_id,
-                'text': 'Gracias por la reacción: '+reaction,
+                'text': 'Gracias por la reacción: '+ reaction,
                 # 'thread_ts': ts
             }
             self.client.chat_postMessage(**message)
+
+
+        @self.app.route('/slash-command', methods=['POST'])
+        def slash_command():
+            print('SLASH')
+            data = request.form
+            channel_id = data.get('channel_id')
+            text = data.get('text')
+
+            # pp = pprint.PrettyPrinter(indent=4)
+            # pp.pprint(data)
+
+            message = text
+
+            self.client.chat_postMessage(channel=channel_id, text=f"Message: {message}")
+            return Response(), 200
 
