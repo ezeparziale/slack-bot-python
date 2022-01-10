@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+
+  postgres:
+    image: postgres:14.1
+    hostname: postgres_db
+    container_name: postgres_db
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=${DATABASE_USERNAME}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRES_DB=${DATABASE_NAME}
+    # volumes:
+    #   - postgres-db-dev:/var/lib/postgresql/data
+    networks:
+      - slack_bot
+
+  adminer:
+    image: adminer:4.8.1
+    hostname: adminer
+    container_name: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - slack_bot
+
+volumes:
+  postgres-db-dev:
+
+networks:
+  slack_bot:
+    name: slack_bot
