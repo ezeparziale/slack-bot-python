@@ -1,4 +1,4 @@
-# Slack bot
+# :robot: Slack bot
 
 ```cmd
 python -m venv env
@@ -20,7 +20,7 @@ python.exe -m pip install --upgrade pip
 python.exe app.py
 ```
 
-## Extras
+## :test_tube: Extras
 
 La configuración de los eventos necesita un "request_url".  
 Es cualquier url que redireccione al server donde esta corriendo la app.
