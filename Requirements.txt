@@ -1,4 +1,6 @@
-slackeventsapi==3.0.1
-python-dotenv==0.19.2
 Flask==2.0.2
-slack-sdk==3.13.0
+slack-bolt==1.11.1
+SQLAlchemy==1.4.29
+pydantic==1.8.2
+requests==2.26.0
+psycopg2==2.9.3
