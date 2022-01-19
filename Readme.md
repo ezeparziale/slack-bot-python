@@ -1,22 +1,35 @@
 # :robot: Slack bot
 
-```cmd
+Slack bot template con varias funciones.
+
+## Funciones
+
+- Mesanje en directo
+- Mensaje en canal
+- Reación
+- Menciones
+- Comandos
+- Programación de mensajes
+  
+## Run
+
+```shell
 python -m venv env
 ```
 
-```cmd
+```shell
 env/Scripts/Activate.ps1
 ```
 
-```cmd
+```shell
 pip install -r requirements.txt
 ```
 
-```cmd
+```shell
 python.exe -m pip install --upgrade pip
 ```
 
-```cmd
+```shell
 python.exe app.py
 ```
 
