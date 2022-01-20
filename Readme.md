@@ -1,6 +1,8 @@
 # :robot: Slack bot
 
-Slack bot template con varias funciones.
+[![Visits Badge](https://badges.pufler.dev/visits/ezeparziale/slack-bot-python?style=flat-square)]()  
+
+Slack bot template con varias funciones  
 
 ## Funciones
 
