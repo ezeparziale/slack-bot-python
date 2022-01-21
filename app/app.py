@@ -1,4 +1,4 @@
-from listeners import home, reaction, im_message, channel_message, weather, schedule, mentions
+from listeners import home, reaction, im_message, channel_message, weather, cryptocurrency, schedule, mentions
 from config import settings
 from flask import Flask, request, _app_ctx_stack, jsonify, url_for
 from flask_cors import CORS
@@ -39,6 +39,7 @@ reaction.register_listener(slack_client, app)
 im_message.register_listener(slack_client, app)
 channel_message.register_listener(slack_client, app)
 weather.register_listener(slack_client, app)
+cryptocurrency.register_listener(slack_client, app)
 schedule.register_listener(slack_client, app)
 mentions.register_listener(slack_client, app)
 
