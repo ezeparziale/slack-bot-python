@@ -1,7 +1,7 @@
 from flask import Flask
 from slack_bolt import App
-from message_blocks import MessageBlocks
-from weather import Weather
+from utils.message_blocks import MessageBlocks
+from functions.weather import Weather
 
 def register_listener(app: App, flask_app: Flask):
 
