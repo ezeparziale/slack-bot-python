@@ -4,7 +4,7 @@
 
 Slack bot template con varias funciones  
 
-## Funciones
+## :star: Funciones
 
 - Mesanje en directo
 - Mensaje en canal
@@ -13,7 +13,7 @@ Slack bot template con varias funciones
 - Comandos
 - Programación de mensajes
   
-## Run
+## :running_man: Run
 
 ```shell
 python -m venv env
@@ -71,4 +71,18 @@ Una vez descomprimido ejecutar:
 
 ```cmd
 ngrok http 5000
+```
+
+## :bell: Comandos
+
+Obtener el clima en una ciudad:
+
+```text
+/clima nombre_ciudad
+```
+
+Obtener la cotización de una crypto moneda:
+
+```text
+/crypto coin_name
 ```
