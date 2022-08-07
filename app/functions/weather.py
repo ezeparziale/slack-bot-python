@@ -1,5 +1,4 @@
 import requests
-import pprint
 import json
 from app.config import settings
 
@@ -11,7 +10,7 @@ class Weather:
                 "http://api.openweathermap.org/data/2.5/weather",
                 params={
                     "q": ciudad,
-                    "appid": settings.weather_token,
+                    "appid": settings.WEATHER_TOKEN,
                     "lang": "es",
                     "units": "metric",
                 },
