@@ -1,7 +1,5 @@
 # :robot: Slack bot
 
-[![Visits Badge](https://badges.pufler.dev/visits/ezeparziale/slack-bot-python?style=flat-square)]()  
-
 Slack bot template con varias funciones  
 
 ## :star: Funciones
@@ -20,7 +18,7 @@ python -m venv env
 ```
 
 ```shell
-env/Scripts/Activate.ps1
+source env/bin/activate
 ```
 
 ```shell
