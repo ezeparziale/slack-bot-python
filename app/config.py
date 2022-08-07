@@ -2,14 +2,14 @@ from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):
-    slack_bot_token: str
-    slack_signing_secret: str
-    weather_token: str
-    database_hostname: str
-    database_port: str
-    database_password: str
-    database_name: str
-    database_username: str
+    SLACK_BOT_TOKEN: str
+    SLACK_SIGNING_SECRET: str
+    WEATHER_TOKEN: str
+    DATABASE_HOSTNAME: str
+    DATABASE_PORT: str
+    DATABASE_PASSWORD: str
+    DATABASE_NAME: str
+    DATABASE_USERNAME: str
 
     class Config:
         env_file = ".env"
