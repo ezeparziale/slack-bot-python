@@ -1,6 +1,7 @@
-from app.models import Scheduled, User
 from datetime import datetime
+
 from app import db
+from app.models import Scheduled, User
 
 
 def update_home_tab(event, client, context, flask_app):
@@ -14,15 +15,10 @@ def update_home_tab(event, client, context, flask_app):
             .all()
         )
 
-        user = (
-            db.session.query(User)
-            .filter(User.id == user_id)
-            .all()
-        ) 
+        user = db.session.query(User).filter(User.id == user_id).all()
     except Exception as e:
         print(f"Error: {e}")
         schedule_messages = []
-
 
     blocks = []
     blocks.append(
@@ -30,8 +26,8 @@ def update_home_tab(event, client, context, flask_app):
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": ":wave: *Bienvenido <@" + context["user_id"] + "> :house:*"
-            }
+                "text": ":wave: *Bienvenido <@" + context["user_id"] + "> :house:*",
+            },
         }
     )
 
@@ -39,7 +35,10 @@ def update_home_tab(event, client, context, flask_app):
         blocks.append(
             {
                 "type": "section",
-                "text": {"type": "mrkdwn", "text": "Programar un mensaje :point_right:"},
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "Programar un mensaje :point_right:",
+                },
                 "accessory": {
                     "type": "button",
                     "text": {
@@ -95,9 +94,5 @@ def update_home_tab(event, client, context, flask_app):
         )
 
     client.views_publish(
-        user_id=context["user_id"],
-        view={
-            "type": "home",
-            "blocks": blocks
-        }
+        user_id=context["user_id"], view={"type": "home", "blocks": blocks}
     )

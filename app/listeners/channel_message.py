@@ -1,15 +1,16 @@
 import datetime
+
 from flask import Flask
 from slack_bolt import App, BoltContext
 from slack_sdk import WebClient
-from app.utils.utils import ts_to_date
-from app.models import Message, User
-from app.listeners.middleware import no_bot_messages, channel_messages
+
 from app import db
+from app.listeners.middleware import channel_messages, no_bot_messages
+from app.models import Message, User
+from app.utils.utils import ts_to_date
 
 
 def register_listener(app: App, flask_app: Flask):
-    
     @app.event("message", middleware=[no_bot_messages, channel_messages])
     def message_hello(message, say, client: WebClient, context: BoltContext):
         thread_ts = message.get("thread_ts", message.get("ts"))

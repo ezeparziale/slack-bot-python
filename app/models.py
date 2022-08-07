@@ -1,7 +1,8 @@
-from app import db
-from sqlalchemy import Column, Integer, String, FLOAT, BOOLEAN
+from sqlalchemy import BOOLEAN, FLOAT, Column, Integer, String
 from sqlalchemy.sql.expression import text
-from sqlalchemy.sql.sqltypes import DateTime, TIMESTAMP
+from sqlalchemy.sql.sqltypes import TIMESTAMP, DateTime
+
+from app import db
 
 
 class Message(db.Model):

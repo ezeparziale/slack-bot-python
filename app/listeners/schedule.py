@@ -1,16 +1,18 @@
 from datetime import datetime
+
 from flask import Flask
-from slack_bolt import App, BoltContext, Ack, Respond
+from slack_bolt import Ack, App, BoltContext, Respond
 from slack_sdk import WebClient
-from app.modals.schedule_message_modal import build_modal_view
 from slack_sdk.errors import SlackApiError
-from app.utils.utils import built_post_at, tz_info
-from app.models import Scheduled
-from app.actions.update_home import update_home_tab
+
 from app import db
+from app.actions.update_home import update_home_tab
+from app.modals.schedule_message_modal import build_modal_view
+from app.models import Scheduled
+from app.utils.utils import built_post_at, tz_info
+
 
 def register_listener(app: App, flask_app: Flask):
-
     @app.action("schedule_new_message_button")
     @app.command("/schedule_message")
     def open_schedule_new_message_modal(
@@ -25,7 +27,6 @@ def register_listener(app: App, flask_app: Flask):
             trigger_id=body["trigger_id"],
             view=build_modal_view(None, tz_offset),
         )
-
 
     @app.view("schedule_new_message")
     def schedule_new_message_view_submission(
@@ -50,10 +51,10 @@ def register_listener(app: App, flask_app: Flask):
 
         errors = {}
         if post_at <= datetime.now(tz=tz_info(tz_offset)):
-            fecha_poast_at = post_at.strftime('%Y-%m-%d')
-            hora_poast_at = post_at.strftime('%H:%M')
-            fecha_hoy = datetime.now(tz=tz_info(tz_offset)).strftime('%Y-%m-%d')
-            hora_hoy = datetime.now(tz=tz_info(tz_offset)).strftime('%H:%M')
+            fecha_poast_at = post_at.strftime("%Y-%m-%d")
+            hora_poast_at = post_at.strftime("%H:%M")
+            fecha_hoy = datetime.now(tz=tz_info(tz_offset)).strftime("%Y-%m-%d")
+            hora_hoy = datetime.now(tz=tz_info(tz_offset)).strftime("%H:%M")
             if fecha_poast_at < fecha_hoy:
                 errors["date"] = "Selecciona una fecha correcta"
             else:

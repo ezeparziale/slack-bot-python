@@ -1,18 +1,18 @@
-from flask import Flask
-from slack_bolt import App, BoltContext, Ack
-from slack_sdk import WebClient
-from app.models import Scheduled, User
-from app.actions.update_home import update_home_tab
 from datetime import datetime
+
+from flask import Flask
+from slack_bolt import Ack, App, BoltContext
+from slack_sdk import WebClient
+
 from app import db
+from app.actions.update_home import update_home_tab
+from app.models import Scheduled, User
 
 
 def register_listener(app: App, flask_app: Flask):
-
     @app.event("app_home_opened")
     def show_home_tab(event, client, context):
         update_home_tab(event, client, context, flask_app)
-
 
     @app.action("delete_scheduled_message_button")
     def delete_scheduled_message(
@@ -28,15 +28,13 @@ def register_listener(app: App, flask_app: Flask):
         ack()
         user_info = client.users_info(token=context.user_token, user=context.user_id)
 
-        schedule_message = (
-            db.session.query(Scheduled)
-            .filter(Scheduled.scheduled_message_id == scheduled_message_id)
+        schedule_message = db.session.query(Scheduled).filter(
+            Scheduled.scheduled_message_id == scheduled_message_id
         )
         schedule_message.delete(synchronize_session=False)
         db.session.commit()
 
         update_home_tab(event, client, context, flask_app)
-
 
     @app.action("hello_bot")
     def init_bot_user(
@@ -45,8 +43,11 @@ def register_listener(app: App, flask_app: Flask):
         ack()
 
         user_id = context["user_id"]
-        channel_id=""
-        response = client.chat_postMessage(text=f"Bienvenido!!! :grinning:\n Ya puedes disfrutar de todas mis funciones :tada:", channel=user_id)
+        channel_id = ""
+        response = client.chat_postMessage(
+            text=f"Bienvenido!!! :grinning:\n Ya puedes disfrutar de todas mis funciones :tada:",
+            channel=user_id,
+        )
 
         user_info = client.users_info(token=context.user_token, user=context.user_id)
 

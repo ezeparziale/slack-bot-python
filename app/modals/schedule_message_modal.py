@@ -1,6 +1,8 @@
 import json
 from typing import Optional
+
 from app.utils.utils import date, time_minutes_later
+
 
 def build_modal_view(message: Optional[dict], tz_offset: int):
     modal = {
@@ -14,7 +16,7 @@ def build_modal_view(message: Optional[dict], tz_offset: int):
 
     blocks = []
     blocks.extend(
-        [ 
+        [
             {
                 "type": "input",
                 "block_id": "message",

@@ -1,10 +1,11 @@
 from flask import Flask
 from slack_bolt import App
-from app.utils.message_blocks import MessageBlocks
+
 from app.functions.weather import Weather
+from app.utils.message_blocks import MessageBlocks
+
 
 def register_listener(app: App, flask_app: Flask):
-
     @app.command("/clima")
     def slash_get_clima(ack, body, client):
         ack()

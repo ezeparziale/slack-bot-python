@@ -50,37 +50,36 @@ class MessageBlocks:
         blocks = []
 
         for crypto in list(cryptos):
-            link = f"*<www.coingecko.com/es/monedas/{crypto['name'].lower()}|{crypto['name'].upper()}>*" 
+            link = f"*<www.coingecko.com/es/monedas/{crypto['name'].lower()}|{crypto['name'].upper()}>*"
             blocks.append(
-                    {
-                        "type": "section",
-                        "text": {
-                            "type": "mrkdwn",
-                            "text": f"{link} \nSimbolo: {crypto['symbol'].upper()} \nPrecio: {crypto['current_price']:,}",
-                        },
-                        "accessory": {
-                            "type": "image",
-                            "image_url": crypto['image'],
-                            "alt_text": crypto['symbol'],
-                        },
-                    }
+                {
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": f"{link} \nSimbolo: {crypto['symbol'].upper()} \nPrecio: {crypto['current_price']:,}",
+                    },
+                    "accessory": {
+                        "type": "image",
+                        "image_url": crypto["image"],
+                        "alt_text": crypto["symbol"],
+                    },
+                }
             )
             blocks.append(
-                    {
-                        "type": "context",
-                        "elements": [
-                            {
-                                "type": "image",
-                                "image_url": "https://api.slack.com/img/blocks/bkb_template_images/tripAgentLocationMarker.png",
-                                "alt_text": "Pin Icon",
-                            },
-                            {
-                                "type": "plain_text",
-                                "emoji": True,
-                                "text": f"Actualizado: {crypto['last_updated']}",
-                            },
-                        ],
-                    },
-                
+                {
+                    "type": "context",
+                    "elements": [
+                        {
+                            "type": "image",
+                            "image_url": "https://api.slack.com/img/blocks/bkb_template_images/tripAgentLocationMarker.png",
+                            "alt_text": "Pin Icon",
+                        },
+                        {
+                            "type": "plain_text",
+                            "emoji": True,
+                            "text": f"Actualizado: {crypto['last_updated']}",
+                        },
+                    ],
+                },
             )
         return blocks

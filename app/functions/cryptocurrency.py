@@ -1,5 +1,7 @@
-import requests
 import json
+
+import requests
+
 from app.config import settings
 
 
@@ -8,7 +10,7 @@ class Crypto:
         try:
             response = requests.get(
                 "https://api.coingecko.com/api/v3/coins/markets",
-            params={
+                params={
                     "vs_currency": "usd",
                     "ids": coins,
                     "order": "market_cap_desc",
