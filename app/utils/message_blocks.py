@@ -1,6 +1,3 @@
-import json
-
-
 class MessageBlocks:
     START_TEXT = {
         "type": "section",

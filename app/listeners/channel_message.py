@@ -1,5 +1,3 @@
-import datetime
-
 from flask import Flask
 from slack_bolt import App, BoltContext
 from slack_sdk import WebClient

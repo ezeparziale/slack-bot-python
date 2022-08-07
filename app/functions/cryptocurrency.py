@@ -2,8 +2,6 @@ import json
 
 import requests
 
-from app.config import settings
-
 
 class Crypto:
     def get_crypto_currency(coins):
