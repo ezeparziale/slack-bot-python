@@ -1,10 +1,10 @@
-from listeners import home, reaction, im_message, channel_message, weather, cryptocurrency, schedule, mentions
-from config import settings
+from app.listeners import home, reaction, im_message, channel_message, weather, cryptocurrency, schedule, mentions
+from app.config import settings
 from flask import Flask, request, _app_ctx_stack, jsonify, url_for
 from flask_cors import CORS
 from sqlalchemy.orm import scoped_session
-import models
-from database import SessionLocal, engine
+from app import models
+from app.database import SessionLocal, engine
 from slack_bolt import App
 from slack_bolt.adapter.flask import SlackRequestHandler
 
@@ -18,8 +18,9 @@ handler = SlackRequestHandler(slack_client)
 app = Flask(__name__)
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
+
 CORS(app)
-app.session = scoped_session(SessionLocal, scopefunc=_app_ctx_stack.__ident_func__)
+app.session = scoped_session(SessionLocal)
 
 @app.route("/slack/events", methods=["POST"])
 def slack_events():

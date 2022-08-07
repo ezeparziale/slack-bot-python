@@ -1,6 +1,6 @@
 import json
 from typing import Optional
-from utils.utils import date, time_minutes_later
+from app.utils.utils import date, time_minutes_later
 
 def build_modal_view(message: Optional[dict], tz_offset: int):
     modal = {

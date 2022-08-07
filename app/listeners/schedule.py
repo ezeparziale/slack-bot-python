@@ -2,11 +2,11 @@ from datetime import datetime
 from flask import Flask
 from slack_bolt import App, BoltContext, Ack, Respond
 from slack_sdk import WebClient
-from modals.schedule_message_modal import build_modal_view
+from app.modals.schedule_message_modal import build_modal_view
 from slack_sdk.errors import SlackApiError
-from utils.utils import built_post_at, tz_info
-from models import Scheduled
-from actions.update_home import update_home_tab
+from app.utils.utils import built_post_at, tz_info
+from app.models import Scheduled
+from app.actions.update_home import update_home_tab
 
 
 def register_listener(app: App, flask_app: Flask):

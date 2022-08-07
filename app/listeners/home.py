@@ -1,9 +1,8 @@
 from flask import Flask
 from slack_bolt import App, BoltContext, Ack
 from slack_sdk import WebClient
-from models import Scheduled
-from actions.update_home import update_home_tab
-from models import User
+from app.models import Scheduled, User
+from app.actions.update_home import update_home_tab
 from datetime import datetime
 
 

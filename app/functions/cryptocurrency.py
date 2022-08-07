@@ -1,6 +1,6 @@
 import requests
 import json
-from config import settings
+from app.config import settings
 
 
 class Crypto:

@@ -1,7 +1,7 @@
 from flask import Flask
 from slack_bolt import App
-from utils.message_blocks import MessageBlocks
-from functions.cryptocurrency import Crypto
+from app.utils.message_blocks import MessageBlocks
+from app.functions.cryptocurrency import Crypto
 
 def register_listener(app: App, flask_app: Flask):
 

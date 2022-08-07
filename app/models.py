@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.sql.sqltypes import FLOAT, Boolean, DateTime, TIMESTAMP
 from sqlalchemy.sql.expression import text
-from database import Base
+from app.database import Base
 
 
 class Message(Base):

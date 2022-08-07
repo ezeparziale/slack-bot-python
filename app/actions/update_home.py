@@ -1,4 +1,4 @@
-import models
+from app import models
 from datetime import datetime
 
 
@@ -18,9 +18,9 @@ def update_home_tab(event, client, context, flask_app):
             .filter(models.User.id == user_id)
             .all()
         ) 
-    except Exception:
+    except Exception as e:
+        print(f"Error: {e}")
         schedule_messages = []
-
 
 
     blocks = []

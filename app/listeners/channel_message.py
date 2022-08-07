@@ -2,9 +2,9 @@ import datetime
 from flask import Flask
 from slack_bolt import App, BoltContext
 from slack_sdk import WebClient
-from utils.utils import ts_to_date
-from models import Message, User
-from listeners.middleware import no_bot_messages, channel_messages
+from app.utils.utils import ts_to_date
+from app.models import Message, User
+from app.listeners.middleware import no_bot_messages, channel_messages
 
 
 def register_listener(app: App, flask_app: Flask):

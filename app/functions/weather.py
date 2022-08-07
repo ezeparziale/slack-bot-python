@@ -1,7 +1,7 @@
 import requests
 import pprint
 import json
-from config import settings
+from app.config import settings
 
 
 class Weather:
