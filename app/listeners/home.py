@@ -4,6 +4,7 @@ from slack_sdk import WebClient
 from app.models import Scheduled, User
 from app.actions.update_home import update_home_tab
 from datetime import datetime
+from app import db
 
 
 def register_listener(app: App, flask_app: Flask):
@@ -28,11 +29,11 @@ def register_listener(app: App, flask_app: Flask):
         user_info = client.users_info(token=context.user_token, user=context.user_id)
 
         schedule_message = (
-            flask_app.session.query(Scheduled)
+            db.session.query(Scheduled)
             .filter(Scheduled.scheduled_message_id == scheduled_message_id)
         )
         schedule_message.delete(synchronize_session=False)
-        flask_app.session.commit()
+        db.session.commit()
 
         update_home_tab(event, client, context, flask_app)
 
@@ -57,7 +58,7 @@ def register_listener(app: App, flask_app: Flask):
         }
 
         user = User(**user_data)
-        flask_app.session.merge(user)
-        flask_app.session.commit()
+        db.session.merge(user)
+        db.session.commit()
 
         update_home_tab(event, client, context, flask_app)

@@ -5,7 +5,7 @@ from slack_sdk import WebClient
 from app.utils.utils import ts_to_date
 from app.models import Message, User
 from app.listeners.middleware import no_bot_messages, im_messages
-
+from app import db
 
 def register_listener(app: App, flask_app: Flask):
     
@@ -27,8 +27,8 @@ def register_listener(app: App, flask_app: Flask):
         }
 
         message_user = Message(**message)
-        flask_app.session.add(message_user)
-        flask_app.session.commit()
+        db.session.add(message_user)
+        db.session.commit()
 
         user_info = client.users_info(token=context.user_token, user=context.user_id)
         user_data = {
@@ -39,5 +39,5 @@ def register_listener(app: App, flask_app: Flask):
         }
 
         user = User(**user_data)
-        flask_app.session.merge(user)
-        flask_app.session.commit()
+        db.session.merge(user)
+        db.session.commit()

@@ -1,10 +1,10 @@
-from sqlalchemy import Column, Integer, String
-from sqlalchemy.sql.sqltypes import FLOAT, Boolean, DateTime, TIMESTAMP
+from app import db
+from sqlalchemy import Column, Integer, String, FLOAT, BOOLEAN
 from sqlalchemy.sql.expression import text
-from app.database import Base
+from sqlalchemy.sql.sqltypes import DateTime, TIMESTAMP
 
 
-class Message(Base):
+class Message(db.Model):
     __tablename__ = "messages"
 
     id = Column(Integer, primary_key=True, nullable=False)
@@ -14,10 +14,10 @@ class Message(Base):
     channel_type = Column(String(120), nullable=False)
     ts = Column(FLOAT, nullable=False)
     date = Column(DateTime, nullable=False)
-    thread = Column(Boolean, nullable=False)
+    thread = Column(BOOLEAN, nullable=False)
 
 
-class User(Base):
+class User(db.Model):
     __tablename__ = "users"
 
     id = Column(String(80), nullable=False, primary_key=True)
@@ -31,7 +31,7 @@ class User(Base):
     )
 
 
-class Scheduled(Base):
+class Scheduled(db.Model):
     __tablename__ = "scheduled_messages"
 
     id = Column(Integer, primary_key=True, nullable=False)

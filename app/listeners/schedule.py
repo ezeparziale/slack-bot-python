@@ -7,7 +7,7 @@ from slack_sdk.errors import SlackApiError
 from app.utils.utils import built_post_at, tz_info
 from app.models import Scheduled
 from app.actions.update_home import update_home_tab
-
+from app import db
 
 def register_listener(app: App, flask_app: Flask):
 
@@ -83,8 +83,8 @@ def register_listener(app: App, flask_app: Flask):
                 "text": result.get("message").get("text"),
             }
             scheduled_message = Scheduled(**message)
-            flask_app.session.merge(scheduled_message)
-            flask_app.session.commit()
+            db.session.merge(scheduled_message)
+            db.session.commit()
 
             ack()
 

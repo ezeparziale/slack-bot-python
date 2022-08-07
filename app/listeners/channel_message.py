@@ -5,6 +5,7 @@ from slack_sdk import WebClient
 from app.utils.utils import ts_to_date
 from app.models import Message, User
 from app.listeners.middleware import no_bot_messages, channel_messages
+from app import db
 
 
 def register_listener(app: App, flask_app: Flask):
@@ -27,5 +28,5 @@ def register_listener(app: App, flask_app: Flask):
         }
 
         message_user = Message(**message)
-        flask_app.session.add(message_user)
-        flask_app.session.commit()
+        db.session.add(message_user)
+        db.session.commit()

@@ -1,21 +1,22 @@
-from app import models
+from app.models import Scheduled, User
 from datetime import datetime
+from app import db
 
 
 def update_home_tab(event, client, context, flask_app):
     user_id = context["user_id"]
     try:
         schedule_messages = (
-            flask_app.session.query(models.Scheduled)
-            .join(models.User, models.Scheduled.channel == models.User.channel, isouter=True)
-            .filter(models.User.id == user_id)
-            .filter(models.Scheduled.post_at >= datetime.now().timestamp())
+            db.session.query(Scheduled)
+            .join(User, Scheduled.channel == User.channel, isouter=True)
+            .filter(User.id == user_id)
+            .filter(Scheduled.post_at >= datetime.now().timestamp())
             .all()
         )
 
         user = (
-            flask_app.session.query(models.User)
-            .filter(models.User.id == user_id)
+            db.session.query(User)
+            .filter(User.id == user_id)
             .all()
         ) 
     except Exception as e:

@@ -1,26 +1,26 @@
-from app.listeners import home, reaction, im_message, channel_message, weather, cryptocurrency, schedule, mentions
 from app.config import settings
-from flask import Flask, request, _app_ctx_stack, jsonify, url_for
+from flask import Flask, request
 from flask_cors import CORS
-from sqlalchemy.orm import scoped_session
-from app import models
-from app.database import SessionLocal, engine
 from slack_bolt import App
 from slack_bolt.adapter.flask import SlackRequestHandler
+from flask_sqlalchemy import SQLAlchemy
 
-models.Base.metadata.create_all(bind=engine)
 
 # SlackBot
-slack_client = App(token=settings.slack_bot_token, signing_secret=settings.slack_signing_secret)
+slack_client = App(token=settings.SLACK_BOT_TOKEN, signing_secret=settings.SLACK_SIGNING_SECRET)
 handler = SlackRequestHandler(slack_client)
 
 ## Flask app
 app = Flask(__name__)
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://{settings.DATABASE_USERNAME}:{settings.DATABASE_PASSWORD}@{settings.DATABASE_HOSTNAME}:{settings.DATABASE_PORT}/{settings.DATABASE_NAME}"
 
+
+## SQLAlchemy
+db = SQLAlchemy(app)
+db.create_all()
 
 CORS(app)
-app.session = scoped_session(SessionLocal)
 
 @app.route("/slack/events", methods=["POST"])
 def slack_events():
@@ -35,6 +35,8 @@ def slack_slash_test():
     return handler.handle(request)
 
 ## Listeners
+from app.listeners import home, reaction, im_message, channel_message, weather, cryptocurrency, schedule, mentions
+
 home.register_listener(slack_client, app)
 reaction.register_listener(slack_client, app)
 im_message.register_listener(slack_client, app)
