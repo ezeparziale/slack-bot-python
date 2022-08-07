@@ -12,7 +12,7 @@ slack_client = App(
 )
 handler = SlackRequestHandler(slack_client)
 
-## Flask app
+# Flask app
 app = Flask(__name__)
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config[
@@ -24,9 +24,10 @@ app.config[
 db = SQLAlchemy(app)
 db.create_all()
 
+# CORS
 CORS(app)
 
-
+# Events
 @app.route("/slack/events", methods=["POST"])
 def slack_events():
     return handler.handle(request)
