@@ -3,7 +3,7 @@ import json
 import requests
 
 from app.config import settings
-
+from app import app
 
 class Weather:
     def get_clima(ciudad):
@@ -20,4 +20,4 @@ class Weather:
 
             return json.loads(response.text)
         except Exception as e:
-            print(e)
+            app.logger.error(f"Error: {e}")

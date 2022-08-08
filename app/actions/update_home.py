@@ -17,7 +17,7 @@ def update_home_tab(event, client, context, flask_app):
 
         user = db.session.query(User).filter(User.id == user_id).all()
     except Exception as e:
-        print(f"Error: {e}")
+        flask_app.logger.error(f"Error: {e}")
         schedule_messages = []
 
     blocks = []

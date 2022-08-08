@@ -10,6 +10,7 @@ from app.actions.update_home import update_home_tab
 from app.modals.schedule_message_modal import build_modal_view
 from app.models import Scheduled
 from app.utils.utils import built_post_at, tz_info
+from app import app
 
 
 def register_listener(app: App, flask_app: Flask):
@@ -92,4 +93,4 @@ def register_listener(app: App, flask_app: Flask):
             update_home_tab(event, client, context, flask_app)
 
         except SlackApiError as e:
-            print("Error: ", e)
+            app.logger.error(f"Error: {e}")

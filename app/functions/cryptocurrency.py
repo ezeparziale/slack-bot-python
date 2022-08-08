@@ -1,7 +1,7 @@
 import json
 
 import requests
-
+from app import app
 
 class Crypto:
     def get_crypto_currency(coins):
@@ -20,4 +20,4 @@ class Crypto:
 
             return json.loads(response.text)
         except Exception as e:
-            print(e)
+            app.logger.error(f"Error: {e}")
