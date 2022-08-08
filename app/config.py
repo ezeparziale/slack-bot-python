@@ -2,15 +2,13 @@ from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):
+    SECRET_KEY: str
+    SQLALCHEMY_TRACK_MODIFICATIONS: bool = False
     SLACK_BOT_TOKEN: str
     SLACK_SIGNING_SECRET: str
     WEATHER_TOKEN: str
-    DATABASE_HOSTNAME: str
-    DATABASE_PORT: str
-    DATABASE_PASSWORD: str
-    DATABASE_NAME: str
-    DATABASE_USERNAME: str
-
+    SQLALCHEMY_DATABASE_URI: str
+    
     class Config:
         env_file = ".env"
 
