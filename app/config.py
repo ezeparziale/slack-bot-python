@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     SLACK_SIGNING_SECRET: str
     WEATHER_TOKEN: str
     SQLALCHEMY_DATABASE_URI: str
-    
+
     class Config:
         env_file = ".env"
 

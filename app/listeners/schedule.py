@@ -5,12 +5,11 @@ from slack_bolt import Ack, App, BoltContext, Respond
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 
-from app import db
+from app import app, db
 from app.actions.update_home import update_home_tab
 from app.modals.schedule_message_modal import build_modal_view
 from app.models import Scheduled
 from app.utils.utils import built_post_at, tz_info
-from app import app
 
 
 def register_listener(app: App, flask_app: Flask):

@@ -2,8 +2,9 @@ import json
 
 import requests
 
-from app.config import settings
 from app import app
+from app.config import settings
+
 
 class Weather:
     def get_clima(ciudad):

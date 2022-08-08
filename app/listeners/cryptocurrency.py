@@ -1,9 +1,10 @@
 from flask import Flask
 from slack_bolt import App
 
+from app import app
 from app.functions.cryptocurrency import Crypto
 from app.utils.message_blocks import MessageBlocks
-from app import app
+
 
 def register_listener(app: App, flask_app: Flask):
     @app.command("/crypto")

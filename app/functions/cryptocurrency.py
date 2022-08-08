@@ -1,7 +1,9 @@
 import json
 
 import requests
+
 from app import app
+
 
 class Crypto:
     def get_crypto_currency(coins):
