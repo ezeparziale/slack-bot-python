@@ -14,15 +14,10 @@ handler = SlackRequestHandler(slack_client)
 
 # Flask app
 app = Flask(__name__)
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config[
-    "SQLALCHEMY_DATABASE_URI"
-] = f"postgresql://{settings.DATABASE_USERNAME}:{settings.DATABASE_PASSWORD}@{settings.DATABASE_HOSTNAME}:{settings.DATABASE_PORT}/{settings.DATABASE_NAME}"
-
+app.config.from_object(settings)
 
 ## SQLAlchemy
 db = SQLAlchemy(app)
-db.create_all()
 
 # CORS
 CORS(app)
