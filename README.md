@@ -22,14 +22,14 @@ source env/bin/activate
 ```
 
 ```shell
-pip install -r requirements.txt
-```
-
-```shell
 python.exe -m pip install --upgrade pip
 ```
 
-Para la base de datos:
+```shell
+pip install -r requirements.txt
+```
+
+Para la base de datos+app:
 
 ```shell
 docker-compose -f "docker-compose.yml" up -d
@@ -38,7 +38,7 @@ docker-compose -f "docker-compose.yml" up -d
 Para la app:
 
 ```shell
-python.exe app.py
+flask --debug run
 ```
 
 ## :right_anger_bubble: Slack
