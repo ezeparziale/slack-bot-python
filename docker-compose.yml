@@ -9,10 +9,8 @@ services:
     restart: always
     ports:
       - 5432:5432
-    environment:
-      - POSTGRES_USER=${DATABASE_USERNAME}
-      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
-      - POSTGRES_DB=${DATABASE_NAME}
+    env_file:
+      - ./.env.db
     # volumes:
     #   - postgres-db-dev:/var/lib/postgresql/data
     networks:
