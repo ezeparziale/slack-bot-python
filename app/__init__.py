@@ -1,3 +1,5 @@
+from logging.config import dictConfig
+
 from flask import Flask, request
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
@@ -5,6 +7,26 @@ from slack_bolt import App
 from slack_bolt.adapter.flask import SlackRequestHandler
 
 from app.config import settings
+
+dictConfig(
+    {
+        "version": 1,
+        "formatters": {
+            "default": {
+                "format": "[%(asctime)s] [%(levelname)s] [%(module)s] %(message)s",
+                "datefmt": "%Y-%m-%d %I:%M:%S %z",
+            }
+        },
+        "handlers": {
+            "wsgi": {
+                "class": "logging.StreamHandler",
+                "stream": "ext://flask.logging.wsgi_errors_stream",
+                "formatter": "default",
+            }
+        },
+        "root": {"level": "INFO", "handlers": ["wsgi"]},
+    }
+)
 
 # SlackBot
 slack_client = App(
