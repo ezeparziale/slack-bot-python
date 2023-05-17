@@ -29,8 +29,9 @@ def register_listener(app: App, flask_app: Flask):
         }
 
         message_user = Message(**message)
-        db.session.add(message_user)
-        db.session.commit()
+        with flask_app.app_context():
+            db.session.add(message_user)
+            db.session.commit()
 
         user_info = client.users_info(token=context.user_token, user=context.user_id)
         user_data = {
@@ -41,5 +42,6 @@ def register_listener(app: App, flask_app: Flask):
         }
 
         user = User(**user_data)
-        db.session.merge(user)
-        db.session.commit()
+        with flask_app.app_context():
+            db.session.merge(user)
+            db.session.commit()

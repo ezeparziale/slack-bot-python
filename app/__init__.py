@@ -44,6 +44,7 @@ db = SQLAlchemy(app)
 # CORS
 CORS(app)
 
+
 # Events
 @app.route("/slack/events", methods=["POST"])
 def slack_events():

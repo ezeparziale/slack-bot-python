@@ -84,8 +84,9 @@ def register_listener(app: App, flask_app: Flask):
                 "text": result.get("message").get("text"),
             }
             scheduled_message = Scheduled(**message)
-            db.session.merge(scheduled_message)
-            db.session.commit()
+            with flask_app.app_context():
+                db.session.merge(scheduled_message)
+                db.session.commit()
 
             ack()
 

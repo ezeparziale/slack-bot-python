@@ -28,11 +28,12 @@ def register_listener(app: App, flask_app: Flask):
         ack()
         user_info = client.users_info(token=context.user_token, user=context.user_id)
 
-        schedule_message = db.session.query(Scheduled).filter(
-            Scheduled.scheduled_message_id == scheduled_message_id
-        )
-        schedule_message.delete(synchronize_session=False)
-        db.session.commit()
+        with flask_app.app_context():
+            schedule_message = db.session.query(Scheduled).filter(
+                Scheduled.scheduled_message_id == scheduled_message_id
+            )
+            schedule_message.delete(synchronize_session=False)
+            db.session.commit()
 
         update_home_tab(event, client, context, flask_app)
 
@@ -59,7 +60,8 @@ def register_listener(app: App, flask_app: Flask):
         }
 
         user = User(**user_data)
-        db.session.merge(user)
-        db.session.commit()
+        with flask_app.app_context():
+            db.session.merge(user)
+            db.session.commit()
 
         update_home_tab(event, client, context, flask_app)

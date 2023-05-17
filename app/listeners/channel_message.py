@@ -27,5 +27,6 @@ def register_listener(app: App, flask_app: Flask):
         }
 
         message_user = Message(**message)
-        db.session.add(message_user)
-        db.session.commit()
+        with flask_app.app_context():
+            db.session.add(message_user)
+            db.session.commit()
