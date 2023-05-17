@@ -38,7 +38,7 @@ docker-compose -f "docker-compose.yml" up -d
 Para la app:
 
 ```shell
-flask --debug run
+flask run --debug
 ```
 
 ## :right_anger_bubble: Slack
