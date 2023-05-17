@@ -63,7 +63,6 @@ def slack_slash_test():
 ## Listeners
 from app.listeners import (
     channel_message,
-    cryptocurrency,
     home,
     im_message,
     mentions,
@@ -77,7 +76,6 @@ reaction.register_listener(slack_client, app)
 im_message.register_listener(slack_client, app)
 channel_message.register_listener(slack_client, app)
 weather.register_listener(slack_client, app)
-cryptocurrency.register_listener(slack_client, app)
 schedule.register_listener(slack_client, app)
 mentions.register_listener(slack_client, app)
 
